@@ -1,71 +1,121 @@
-# coderscript-dev (final version — Concept B palette)
+# coderscript.dev
 
-Same structure as the design you built in Claude Design — hero, about
-quote, latest posts, subscribe box, footer — but reskinned with the
-navy/periwinkle "Concept B" palette instead of the mint green, per your
-call. Markdown-based publishing carries over unchanged.
+A personal blog about code, built as a React single-page app and published as
+static files to GitHub Pages at [coderscript.dev](https://coderscript.dev).
 
-Palette: `#141824` navy background, `#6E7BFF` periwinkle accent. Logo mark
-is the chevron + cursor block from Concept B, not the mint circuit-bracket.
+Posts are plain Markdown files in the repo. Adding one is a commit — there's no
+CMS, no database, and no build step to run by hand.
 
-## Before you push this live, edit two things:
+## Stack
 
-1. **Footer social links** — `src/components/Footer.jsx` has placeholder
-   URLs (`instagram.com/coderscript.dev`, `github.com/onkar3003`,
-   `hello@coderscript.dev`). Swap in your real ones.
+| Piece | What it does |
+| --- | --- |
+| [Vite 5](https://vitejs.dev) | Dev server and production bundler |
+| React 18 | UI |
+| react-router-dom 6 | Client-side routing (`/`, `/blog`, `/blog/:slug`) |
+| markdown-it | Renders post Markdown to HTML at build time |
+| GitHub Actions + Pages | Builds and deploys on every push to `master` |
 
-2. **The subscribe form is visual only** — it doesn't collect emails yet,
-   same as it was in the Claude Design mockup (`onsubmit` just prevents
-   the page reload). To make it real, you'd wire the `<form>` in
-   `src/pages/Home.jsx` up to a provider like Buttondown, ConvertKit, or
-   Mailchimp — happy to do that when you're ready.
+No CSS framework — styling is a single hand-written stylesheet,
+[global.css](src/styles/global.css), driven by custom properties.
 
 ## Run it locally
 
 ```bash
 npm install
-npm run dev
+npm run dev      # http://localhost:5173
 ```
 
-## Publish a new post
+Other scripts: `npm run build` (outputs to `dist/`) and `npm run preview` to
+serve that build locally.
 
-Same as before — add a Markdown file, nothing else to touch:
+## Publish a post
+
+Add a Markdown file to [src/content/posts/](src/content/posts/) — the filename
+becomes the URL slug, so `four-hour-timezone-bug.md` is served at
+`/blog/four-hour-timezone-bug`.
 
 ```markdown
 ---
 title: Your Post Title
 date: 2026-08-10
-excerpt: One or two sentences shown in the card.
+excerpt: One or two sentences shown on the card.
 tag: debugging
 ---
 
 Your post content here, in normal Markdown.
 ```
 
-Save it as `src/content/posts/your-slug.md`, commit, push. It appears in
-"Latest posts" on the home page (top 3) and in the full archive at `/blog`.
-The `tag` field is optional — if you skip it, the card shows reading time
-instead.
+Commit and push. The post appears in "Latest posts" on the home page (newest
+three) and in the full archive at `/blog`, sorted newest first.
 
-## Logo files
+Frontmatter notes:
 
-`public/logo.svg` is the badge version (dark circle + mark). The mark also
-renders live via `src/components/LogoMark.jsx`, used in the header (mint)
-and footer (dimmed) — so if you ever want to adjust the icon itself, that's
-the one file to edit; header and footer both pick up the change.
+- `title`, `date`, and `excerpt` are what the cards render. Missing `title`
+  falls back to the slug.
+- `tag` is optional. Without it, the card and article header show an estimated
+  reading time (~200 words/min) instead.
+- The parser in [posts.js](src/lib/posts.js#L10-L23) is deliberately small: one
+  `key: value` per line, no nested YAML, no lists. Quotes around a value are
+  stripped.
 
-## Swapping this into your existing repo
+## How it's wired
 
-Same process as every version so far:
+[src/lib/posts.js](src/lib/posts.js) is the core of the content pipeline. It
+uses Vite's `import.meta.glob(..., { eager: true })` to pull every `.md` file
+into the bundle at build time, parses the frontmatter, renders the body with
+markdown-it, and exports `getAllPosts()` / `getPostBySlug()`. Because this runs
+at build time, the deployed site ships as static assets with no runtime fetches.
 
-1. In your local `coderscript-dev` folder, delete everything except `.git`.
-2. Copy everything from this download in.
-3. Edit the two things listed above first.
-4. Commit and push:
-   ```bash
-   git add .
-   git commit -m "Apply real brand design"
-   git push
-   ```
-5. Same GitHub Actions workflow, same `coderscript.dev` domain, same DNS —
-   nothing else changes.
+```
+src/
+├── main.jsx              # React root + BrowserRouter
+├── App.jsx               # routes
+├── layouts/BaseLayout    # header + <Outlet /> + footer
+├── pages/
+│   ├── Home.jsx          # hero, about quote, latest 3 posts, subscribe box
+│   ├── BlogIndex.jsx     # full archive
+│   └── PostPage.jsx      # single post; unknown slug redirects to /blog
+├── components/           # Header, Footer, PostCard, LogoMark
+├── content/posts/*.md    # the blog itself
+└── styles/global.css     # all styling, one file
+```
+
+Post HTML is injected with `dangerouslySetInnerHTML` in
+[PostPage.jsx](src/pages/PostPage.jsx#L32). That's safe here because the content
+is Markdown this repo owns, and markdown-it is configured with `html: false`.
+If posts ever come from an outside source, sanitize before rendering.
+
+## Deployment
+
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml) runs on every push
+to `master`: `npm install`, `npm run build`, then upload `dist/` to GitHub
+Pages. The custom domain comes from [public/CNAME](public/CNAME).
+
+GitHub Pages serves static files only, so a direct load of `/blog/some-post`
+would 404. [public/404.html](public/404.html) catches the miss, encodes the
+requested path into a query string, and redirects to `index.html`, which decodes
+it back before React Router mounts — so the address bar stays clean. This is the
+[spa-github-pages](https://github.com/rafgraph/spa-github-pages) technique;
+both halves must stay in sync if you touch either file.
+
+## Branding
+
+Navy background `#141824`, periwinkle accent `#6E7BFF`. Both live as custom
+properties at the top of [global.css](src/styles/global.css#L4-L14), along with
+the rest of the palette — change them there and the whole site follows.
+
+The chevron-plus-cursor mark is drawn inline by
+[LogoMark.jsx](src/components/LogoMark.jsx), used at full accent color in the
+header and dimmed in the footer. Edit that one component and both update.
+[public/logo.svg](public/logo.svg) is the standalone badge version (dark circle
++ mark) for use outside the app; it does not update automatically.
+
+## Known gaps
+
+- **The subscribe form is visual only.** The `onSubmit` in
+  [Home.jsx](src/pages/Home.jsx#L64) just calls `preventDefault()` — no emails
+  are collected anywhere. Point the form at a provider (Buttondown, ConvertKit,
+  Mailchimp) to make it real.
+- No RSS feed, no per-post `<meta>` / Open Graph tags (page titles are set via
+  `document.title` only), no tag filtering or pagination on the archive.
