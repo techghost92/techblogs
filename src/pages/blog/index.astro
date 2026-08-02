@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = [
+  {
+    slug: 'hello-world',
+    title: 'Hello, World — why this blog exists',
+    excerpt: 'Starting a coding blog for the same reason we write comments: future-me will thank present-me.',
+    date: '2026-08-02',
+  },
+];
+---
+<BaseLayout title="All posts — your blog" tabLabel="all-posts.astro" current="blog-index">
+  <div class="content">
+    <p class="article-meta">~/blog/posts $ ls -la</p>
+    {posts.map(post => (
+      <div class="post-row">
+        <div>
+          <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
+          <p>{post.excerpt}</p>
+        </div>
+        <span class="post-date">{post.date}</span>
+      </div>
+    ))}
+  </div>
+</BaseLayout>

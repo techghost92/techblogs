@@ -1,0 +1,24 @@
+---
+const { current = '' } = Astro.props;
+const posts = [
+  { slug: 'hello-world', title: 'hello-world' },
+];
+---
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    ~/blog<span class="cursor-blink"></span>
+  </div>
+
+  <div class="tree-label">pages</div>
+  <ul class="tree">
+    <li><a href="/" aria-current={current === 'home' ? 'page' : undefined}>index<span class="ext">.astro</span></a></li>
+    <li><a href="/blog/" aria-current={current === 'blog-index' ? 'page' : undefined}>all-posts<span class="ext">.astro</span></a></li>
+  </ul>
+
+  <div class="tree-label">posts</div>
+  <ul class="tree">
+    {posts.map(p => (
+      <li><a href={`/blog/${p.slug}/`} aria-current={current === p.slug ? 'page' : undefined}>{p.title}<span class="ext">.md</span></a></li>
+    ))}
+  </ul>
+</aside>

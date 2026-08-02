@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Home — your blog" tabLabel="index.astro" current="home">
+  <div class="content hero">
+    <p class="hero-prompt">~/blog $ <span class="accent">whoami</span></p>
+    <h1>Notes from the terminal.</h1>
+    <p class="lede">
+      A running log of things learned, broken, and eventually fixed —
+      written the way code gets written: in small, honest commits.
+    </p>
+    <a class="btn" href="/blog/">cd ./posts →</a>
+  </div>
+</BaseLayout>
