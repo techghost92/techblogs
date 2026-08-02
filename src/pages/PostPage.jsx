@@ -22,6 +22,7 @@ export default function PostPage() {
   return (
     <div className="article-page">
       <div className="article-meta">
+        {post.author && `By ${post.author} · `}
         {formatDate(post.date)}
         {post.tag ? ` · ${post.tag}` : ` · ${post.readingTime} min read`}
       </div>
