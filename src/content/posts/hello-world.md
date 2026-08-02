@@ -3,6 +3,7 @@ title: Hello, World
 date: 2026-08-02
 excerpt: Starting a coding blog for the same reason we write comments — future-me will thank present-me.
 tag: meta
+author: Onkar
 ---
 
 Every project starts the same way: an empty file and too many tabs open.

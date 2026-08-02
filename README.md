@@ -41,23 +41,44 @@ title: Your Post Title
 date: 2026-08-10
 excerpt: One or two sentences shown on the card.
 tag: debugging
+author: Onkar
 ---
 
 Your post content here, in normal Markdown.
 ```
+
+Before committing, run:
+
+```bash
+npm run validate:posts
+```
+
+This checks every post in [src/content/posts](src/content/posts) and fails
+(exit 1) if any is missing `title`, `date`, `tag`, or `author`, has a
+malformed date, or uses a `tag` outside the allowed list in
+[src/lib/tags.js](src/lib/tags.js). It also runs automatically as a step in
+[deploy.yml](.github/workflows/deploy.yml), so a bad post fails CI rather than
+silently deploying.
 
 Commit and push. The post appears in "Latest posts" on the home page (newest
 three) and in the full archive at `/blog`, sorted newest first.
 
 Frontmatter notes:
 
-- `title`, `date`, and `excerpt` are what the cards render. Missing `title`
+- All four fields — `title`, `date`, `tag`, `author` — are required and
+  enforced by `npm run validate:posts`. `excerpt` is optional; missing `title`
   falls back to the slug.
-- `tag` is optional. Without it, the card and article header show an estimated
-  reading time (~200 words/min) instead.
-- The parser in [posts.js](src/lib/posts.js#L10-L23) is deliberately small: one
-  `key: value` per line, no nested YAML, no lists. Quotes around a value are
-  stripped.
+- `date` must be `YYYY-MM-DD`.
+- `tag` must be one of the values in [src/lib/tags.js](src/lib/tags.js)
+  (currently: ai, python, javascript, typescript, nodejs, reactjs, html, css,
+  java, meta, debugging, tooling). This is a closed vocabulary on purpose —
+  it's the list a future tag-filtered `/blog` view would filter by. Add a new
+  tag to that file (not just to a post) before using it.
+- The parser in [frontmatter.js](src/lib/frontmatter.js) is deliberately
+  small: one `key: value` per line, no nested YAML, no lists. Quotes around a
+  value are stripped. Shared between the runtime ([posts.js](src/lib/posts.js))
+  and [scripts/validate-posts.mjs](scripts/validate-posts.mjs) so they can't
+  drift apart.
 
 ## How it's wired
 

@@ -1,26 +1,14 @@
 import MarkdownIt from 'markdown-it';
+import { parseFrontmatter } from './frontmatter.js';
 
 const md = new MarkdownIt({ html: false, linkify: true, typographer: true });
 
 // Loads every .md file in content/posts as a raw string at build time.
 // To publish a new post: add a .md file here with the frontmatter block
 // below, commit, push. No route or component code needs to change.
+// Required frontmatter (title, date, tag, author) is enforced by
+// scripts/validate-posts.mjs, not here — this just renders what's there.
 const files = import.meta.glob('../content/posts/*.md', { as: 'raw', eager: true });
-
-function parseFrontmatter(raw) {
-  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-  if (!match) return { data: {}, content: raw };
-  const [, fm, content] = match;
-  const data = {};
-  fm.split('\n').forEach((line) => {
-    const idx = line.indexOf(':');
-    if (idx === -1) return;
-    const key = line.slice(0, idx).trim();
-    const value = line.slice(idx + 1).trim().replace(/^["']|["']$/g, '');
-    data[key] = value;
-  });
-  return { data, content };
-}
 
 function estimateReadingTime(content) {
   const words = content.trim().split(/\s+/).filter(Boolean).length;
@@ -47,6 +35,7 @@ const posts = Object.entries(files)
       date: data.date || '',
       excerpt: data.excerpt || '',
       tag: data.tag || '',
+      author: data.author || '',
       html: md.render(content),
       readingTime: estimateReadingTime(content),
       hash: shortHash(slug),
