@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -23,6 +25,7 @@ jobs:
         with:
           node-version: 20
       - run: npm install
+      - run: npm run validate:posts
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -30,6 +33,7 @@ jobs:
 
   deploy:
     needs: build
+    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
