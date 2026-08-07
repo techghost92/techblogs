@@ -1,0 +1,55 @@
+<svg viewBox="0 0 640 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title2 desc2">
+  <title id="title2">How one tap travels through the app and back</title>
+  <desc id="desc2">You tap Order on the UI. The API carries the request to the server, where the backend and framework check things and the database stores or looks up data. The reply then travels back up through the API to the UI.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6e7bff"/>
+    </marker>
+    <marker id="arrowDim" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6b7094"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="640" height="600" fill="#141824"/>
+
+  <!-- YOU / UI box -->
+  <rect x="190" y="20" width="260" height="64" rx="10" fill="#1c2236" stroke="#3a4270" stroke-width="1.5"/>
+  <text x="320" y="46" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb" text-anchor="middle">YOU (UI)</text>
+  <text x="320" y="66" font-family="Arial,sans-serif" font-size="13" fill="#9aa0c4" text-anchor="middle">your phone screen</text>
+
+  <!-- down arrow: tap order -->
+  <line x1="290" y1="88" x2="290" y2="144" stroke="#6e7bff" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="118" font-family="ui-monospace,Consolas,monospace" font-size="12" fill="#6e7bff" text-anchor="end">tap "Order"</text>
+
+  <!-- API box -->
+  <rect x="190" y="150" width="260" height="64" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+  <text x="320" y="176" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb" text-anchor="middle">API</text>
+  <text x="320" y="196" font-family="Arial,sans-serif" font-size="13" fill="#9aa0c4" text-anchor="middle">the messenger</text>
+
+  <!-- down arrow: request travels -->
+  <line x1="290" y1="218" x2="290" y2="278" stroke="#6e7bff" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="270" y="252" font-family="ui-monospace,Consolas,monospace" font-size="12" fill="#6e7bff" text-anchor="end">request</text>
+
+  <!-- SERVER container -->
+  <rect x="70" y="284" width="500" height="290" rx="14" fill="none" stroke="#3a4270" stroke-width="1.5" stroke-dasharray="6 5"/>
+  <text x="94" y="312" font-family="ui-monospace,Consolas,monospace" font-size="12" fill="#6e7bff" letter-spacing="1">SERVER &#8212; THE BUILDING</text>
+
+  <!-- Backend + Framework box -->
+  <rect x="110" y="326" width="420" height="70" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+  <text x="320" y="356" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#eef0fb" text-anchor="middle">Backend + Framework</text>
+  <text x="320" y="378" font-family="Arial,sans-serif" font-size="13" fill="#9aa0c4" text-anchor="middle">the kitchen</text>
+
+  <!-- down arrow: checks / saves -->
+  <line x1="320" y1="398" x2="320" y2="430" stroke="#6b7094" stroke-width="2" marker-end="url(#arrowDim)"/>
+  <text x="336" y="418" font-family="ui-monospace,Consolas,monospace" font-size="11" fill="#6b7094">checks / saves</text>
+
+  <!-- Database box -->
+  <rect x="110" y="436" width="420" height="70" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+  <text x="320" y="466" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#eef0fb" text-anchor="middle">Database</text>
+  <text x="320" y="488" font-family="Arial,sans-serif" font-size="13" fill="#9aa0c4" text-anchor="middle">the store room</text>
+
+  <!-- reply path curving back up to YOU, right-hand side -->
+  <path d="M 560 380 C 610 380 610 52 460 52" fill="none" stroke="#6e7bff" stroke-width="2" stroke-dasharray="3 4" marker-end="url(#arrow)"/>
+  <line x1="530" y1="380" x2="560" y2="380" stroke="#6e7bff" stroke-width="2"/>
+  <text x="596" y="220" font-family="ui-monospace,Consolas,monospace" font-size="12" fill="#6e7bff" text-anchor="middle" transform="rotate(90 596 220)">reply travels back up</text>
+</svg>

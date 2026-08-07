@@ -1,3 +1,7 @@
 node_modules/
 dist/
 .env
+
+# Instagram/social images per article — captured and posted around
+# publish time, kept local only, never part of the site or repo.
+/social-media/
