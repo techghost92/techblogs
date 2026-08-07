@@ -1,0 +1,52 @@
+<svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">The five layers of an app</title>
+  <desc id="desc">A stack of five bands from top to bottom: UI, API, Backend and Framework, Database, Server.</desc>
+  <rect x="0" y="0" width="640" height="420" fill="#141824"/>
+
+  <!-- connecting guide line -->
+  <line x1="50" y1="48" x2="50" y2="372" stroke="#2a3150" stroke-width="2" stroke-dasharray="4 5"/>
+
+  <!-- Band 1: UI -->
+  <g>
+    <rect x="20" y="18" width="600" height="60" rx="10" fill="#1c2236" stroke="#3a4270" stroke-width="1.5"/>
+    <text x="50" y="53" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#6e7bff">01</text>
+    <text x="84" y="53" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb">UI</text>
+    <text x="600" y="53" font-family="Arial,sans-serif" font-size="14" fill="#9aa0c4" text-anchor="end">what you tap and see</text>
+  </g>
+  <text x="50" y="93" font-family="Arial,sans-serif" font-size="16" fill="#6b7094" text-anchor="middle">&#9662;</text>
+
+  <!-- Band 2: API -->
+  <g>
+    <rect x="20" y="94" width="600" height="60" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+    <text x="50" y="129" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#6e7bff">02</text>
+    <text x="84" y="129" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb">API</text>
+    <text x="600" y="129" font-family="Arial,sans-serif" font-size="14" fill="#9aa0c4" text-anchor="end">the messenger</text>
+  </g>
+  <text x="50" y="169" font-family="Arial,sans-serif" font-size="16" fill="#6b7094" text-anchor="middle">&#9662;</text>
+
+  <!-- Band 3: Backend + Framework -->
+  <g>
+    <rect x="20" y="170" width="600" height="60" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+    <text x="50" y="205" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#6e7bff">03</text>
+    <text x="84" y="205" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb">Backend + Framework</text>
+    <text x="600" y="205" font-family="Arial,sans-serif" font-size="14" fill="#9aa0c4" text-anchor="end">the kitchen</text>
+  </g>
+  <text x="50" y="245" font-family="Arial,sans-serif" font-size="16" fill="#6b7094" text-anchor="middle">&#9662;</text>
+
+  <!-- Band 4: Database -->
+  <g>
+    <rect x="20" y="246" width="600" height="60" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+    <text x="50" y="281" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#6e7bff">04</text>
+    <text x="84" y="281" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb">Database</text>
+    <text x="600" y="281" font-family="Arial,sans-serif" font-size="14" fill="#9aa0c4" text-anchor="end">the store room</text>
+  </g>
+  <text x="50" y="321" font-family="Arial,sans-serif" font-size="16" fill="#6b7094" text-anchor="middle">&#9662;</text>
+
+  <!-- Band 5: Server -->
+  <g>
+    <rect x="20" y="322" width="600" height="60" rx="10" fill="#1c2236" stroke="#2a3150" stroke-width="1.5"/>
+    <text x="50" y="357" font-family="ui-monospace,Consolas,monospace" font-size="13" fill="#6e7bff">05</text>
+    <text x="84" y="357" font-family="Arial,sans-serif" font-size="17" font-weight="700" fill="#eef0fb">Server</text>
+    <text x="600" y="357" font-family="Arial,sans-serif" font-size="14" fill="#9aa0c4" text-anchor="end">the building it all runs in</text>
+  </g>
+</svg>
