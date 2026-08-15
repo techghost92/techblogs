@@ -7,10 +7,9 @@ function formatDate(dateStr) {
   return d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
 }
 
-export default function PostCard({ post, index }) {
+export default function PostCard({ post }) {
   return (
     <Link to={`/blog/${post.slug}`} className="post-card">
-      <div className="index">{String(index).padStart(2, '0')}</div>
       <div className="title">{post.title}</div>
       {post.excerpt && <div className="excerpt">{post.excerpt}</div>}
       <div className="meta">

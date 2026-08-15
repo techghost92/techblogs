@@ -47,8 +47,8 @@ export default function Home() {
         </div>
         {posts.length === 0 && <p className="empty-state">No posts yet — add one to src/content/posts/.</p>}
         <div className="post-grid">
-          {posts.map((post, i) => (
-            <PostCard key={post.slug} post={post} index={i + 1} />
+          {posts.map((post) => (
+            <PostCard key={post.slug} post={post} />
           ))}
         </div>
       </section>
