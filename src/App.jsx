@@ -10,6 +10,7 @@ export default function App() {
       <Route element={<BaseLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/tag/:tag" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<PostPage />} />
       </Route>
     </Routes>

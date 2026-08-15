@@ -50,3 +50,16 @@ export function getAllPosts() {
 export function getPostBySlug(slug) {
   return posts.find((p) => p.slug === slug);
 }
+
+export function getPostsByTag(tag) {
+  return posts.filter((p) => p.tag === tag);
+}
+
+export function getTagCounts() {
+  const counts = {};
+  posts.forEach((p) => {
+    if (!p.tag) return;
+    counts[p.tag] = (counts[p.tag] || 0) + 1;
+  });
+  return counts;
+}
