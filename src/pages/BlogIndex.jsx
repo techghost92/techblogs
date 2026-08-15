@@ -56,7 +56,6 @@ export default function BlogIndex() {
                 className={`tag-item${tag === t ? ' active' : ''}`}
               >
                 {t}
-                <span className="tag-count">{counts[t]}</span>
               </Link>
             ))}
           </nav>
