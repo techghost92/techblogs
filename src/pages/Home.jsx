@@ -6,7 +6,7 @@ import { getAllPosts } from '../lib/posts.js';
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'coderscript.dev';
+    document.title = 'your-domain.com';
     if (window.location.hash) {
       const el = document.querySelector(window.location.hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });

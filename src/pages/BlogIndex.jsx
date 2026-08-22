@@ -30,7 +30,7 @@ export default function BlogIndex() {
   const basePath = tag ? `/blog/tag/${tag}` : '/blog';
 
   useEffect(() => {
-    document.title = tag ? `${tag} — coderscript.dev` : 'Blog — coderscript.dev';
+    document.title = tag ? `${tag} — your-domain.com` : 'Blog — your-domain.com';
   }, [tag]);
 
   const counts = getTagCounts();

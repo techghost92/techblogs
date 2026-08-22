@@ -1,7 +1,7 @@
-# coderscript.dev
+# your-domain.com
 
 A personal blog about code, built as a React single-page app and published as
-static files to GitHub Pages at [coderscript.dev](https://coderscript.dev).
+static files to GitHub Pages at [your-domain.com](https://your-domain.com).
 
 Posts are plain Markdown files in the repo. Adding one is a commit — there's no
 CMS, no database, and no build step to run by hand.
