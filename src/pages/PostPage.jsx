@@ -14,7 +14,7 @@ export default function PostPage() {
   const post = getPostBySlug(slug);
 
   useEffect(() => {
-    if (post) document.title = `${post.title} — coderscript.dev`;
+    if (post) document.title = `${post.title} — your-domain.com`;
   }, [post]);
 
   if (!post) return <Navigate to="/blog" replace />;
