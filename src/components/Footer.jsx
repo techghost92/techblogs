@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-brand">
-        <LogoMark size={24} color="#6b7094" />
+        <LogoMark size={24} color="#6e6b58" />
         <span>© {year} techblogs by Onkar</span>
       </div>
       <div className="footer-links">
