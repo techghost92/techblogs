@@ -6,7 +6,7 @@ export default function Header() {
     <nav className="site-nav-bar">
       <NavLink to="/" className="brand-lockup">
         <LogoMark size={34} />
-        your-domain<span className="accent">.com</span>
+        techblogs<span className="accent"> by Onkar</span>
       </NavLink>
       <div className="nav-links">
         <NavLink to="/blog">Blog</NavLink>
