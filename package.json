@@ -5,7 +5,9 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/generate-rss.mjs",
     "build": "vite build",
+    "postbuild": "node scripts/generate-static-pages.mjs",
     "preview": "vite preview",
     "validate:posts": "node scripts/validate-posts.mjs"
   },

@@ -3,6 +3,7 @@ import { useParams, useSearchParams, Link } from 'react-router-dom';
 import PostCard from '../components/PostCard.jsx';
 import { getAllPosts, getPostsByTag, getTagCounts } from '../lib/posts.js';
 import { ALLOWED_TAGS } from '../lib/tags.js';
+import { SITE_NAME } from '../config/site.js';
 
 const PAGE_SIZE = 10;
 
@@ -30,7 +31,7 @@ export default function BlogIndex() {
   const basePath = tag ? `/blog/tag/${tag}` : '/blog';
 
   useEffect(() => {
-    document.title = tag ? `${tag} — your-domain.com` : 'Blog — your-domain.com';
+    document.title = tag ? `${tag} — ${SITE_NAME}` : `Blog — ${SITE_NAME}`;
   }, [tag]);
 
   const counts = getTagCounts();

@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import LogoMark from '../components/LogoMark.jsx';
 import PostCard from '../components/PostCard.jsx';
 import { getAllPosts } from '../lib/posts.js';
+import { SITE_NAME } from '../config/site.js';
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'your-domain.com';
+    document.title = SITE_NAME;
     if (window.location.hash) {
       const el = document.querySelector(window.location.hash);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
