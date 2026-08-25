@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Color — Concept B: deep navy with a periwinkle accent */
-  --bg: #141824;
-  --surface: #1c2236;
-  --surface-badge: #0f131f;
-  --border: #2a3150;
-  --border-strong: #3a4270;
-  --text: #eef0fb;
-  --text-dim: #9aa0c4;
-  --text-faint: #6b7094;
-  --accent: #6e7bff;
+  /* Color — warm paper light theme: easier on the eyes for long-form
+     reading than the previous dark navy, with an indigo accent tuned
+     for AA contrast on a light background. */
+  --bg: #fbf9f4;
+  --surface: #ffffff;
+  --surface-badge: #f1ecdd;
+  --border: #e6e0d2;
+  --border-strong: #d2c9b4;
+  --text: #2a2a22;
+  --text-dim: #5c5a4e;
+  --text-faint: #6e6b58;
+  --accent: #4f46e5;
+  --on-accent: #ffffff;
 
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -56,7 +59,6 @@ a { color: inherit; text-decoration: none; }
   font-size: 18px;
   font-weight: 500;
 }
-.brand-lockup .accent { color: var(--accent); }
 
 .nav-links {
   display: flex;
@@ -107,7 +109,7 @@ a { color: inherit; text-decoration: none; }
 
 .btn-primary {
   background: var(--accent);
-  color: var(--surface-badge);
+  color: var(--on-accent);
   padding: 14px 28px;
   border-radius: 6px;
   font-weight: 600;
@@ -245,7 +247,7 @@ a { color: inherit; text-decoration: none; }
 }
 .subscribe-form button {
   background: var(--accent);
-  color: var(--surface-badge);
+  color: var(--on-accent);
   border: none;
   border-radius: 6px;
   padding: 14px 24px;

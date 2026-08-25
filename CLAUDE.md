@@ -18,7 +18,7 @@ npm run validate:posts    # lint every post's frontmatter, exit 1 on failure
 
 There is no test suite and no lint script — `validate:posts` is the only automated check in this repo, and it also runs as a CI step (`.github/workflows/deploy.yml`) before every build, so a bad post fails CI rather than silently deploying.
 
-Note the dev server is reachable at `/techblogs/`, not `/` — `vite.config.js` sets `base: '/techblogs/'` because the site is served from a GitHub Pages subpath, not a custom domain (`public/CNAME` is currently empty).
+Note the dev server is reachable at `/techblogs/`, not `/` — `vite.config.js` sets `base: '/techblogs/'` because the site is served from a GitHub Pages subpath, not a custom domain (there's no `public/CNAME` file).
 
 ## Publishing a post
 
@@ -64,7 +64,9 @@ Convention observed so far: each post is its own branch (`content/<slug>`) with 
 
 Both scripts reuse `parseFrontmatter` from `src/lib/frontmatter.js`, the same parser `posts.js` and `validate-posts.mjs` use — keep it that way rather than reimplementing frontmatter parsing a fourth time.
 
-**Styling**: no CSS framework — a single hand-written stylesheet (`src/styles/global.css`) driven by custom properties defined at the top of the file. Brand colors (navy `#141824`, periwinkle accent `#6E7BFF`) live there; change them once and the whole site follows. The logo mark is drawn inline in JSX (`src/components/LogoMark.jsx`) and used at full accent color in the header, dimmed in the footer — `public/logo.svg` is a separate standalone badge that does **not** update automatically when `LogoMark.jsx` changes.
+**Styling**: no CSS framework — a single hand-written stylesheet (`src/styles/global.css`) driven by custom properties defined at the top of the file. Warm off-white background (`#FBF9F4`), indigo accent (`#4F46E5`) — a light theme chosen for long-form reading comfort over the site's original dark navy. Change values there once and the whole site follows.
+
+**Logo**: a solid squircle badge with a white terminal-prompt glyph (chevron + cursor block) — a filled shape stays legible down to favicon size, where a thin outline mark doesn't. Drawn inline in JSX (`src/components/LogoMark.jsx`); its `color` prop sets the badge fill (full accent in the header/hero, dimmed in the footer). Two copies live outside the app and do **not** update automatically when `LogoMark.jsx` changes: `public/logo.svg` (standalone badge) and `public/favicon.png` (180×180 raster with transparent corners) — regenerate both by hand if the mark changes again.
 
 ## Known gaps
 
