@@ -145,15 +145,21 @@ both halves must stay in sync if you touch either file.
 
 ## Branding
 
-Navy background `#141824`, periwinkle accent `#6E7BFF`. Both live as custom
-properties at the top of [global.css](src/styles/global.css#L4-L14), along with
-the rest of the palette — change them there and the whole site follows.
+Warm off-white background `#FBF9F4`, indigo accent `#4F46E5`. Both live as
+custom properties at the top of
+[global.css](src/styles/global.css#L3-L16), along with the rest of the
+palette — change them there and the whole site follows.
 
-The chevron-plus-cursor mark is drawn inline by
-[LogoMark.jsx](src/components/LogoMark.jsx), used at full accent color in the
-header and dimmed in the footer. Edit that one component and both update.
-[public/logo.svg](public/logo.svg) is the standalone badge version (dark circle
-+ mark) for use outside the app; it does not update automatically.
+The logo is a solid squircle badge with a white terminal-prompt glyph
+(chevron + cursor block) — a filled shape reads clearly down to favicon
+size, where a thin outline mark loses definition. It's drawn inline by
+[LogoMark.jsx](src/components/LogoMark.jsx) (`color` prop sets the badge
+fill; full accent in the header and hero, dimmed in the footer). Edit that
+one component and every in-app use updates. Two copies exist outside the
+app and do **not** update automatically when `LogoMark.jsx` changes:
+[public/logo.svg](public/logo.svg) (standalone badge) and
+[public/favicon.png](public/favicon.png) (180×180 raster, transparent
+corners) — regenerate both by hand if the mark changes again.
 
 ## Known gaps
 
