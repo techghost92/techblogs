@@ -82,6 +82,16 @@ Run either one, visit the URL, and you've built the entire loop by hand: no Expr
 
 Same sharpening move as the `404` vs `500` distinction from the API post: "down" isn't one problem, it's four, and the fix for "nobody started the process" is nothing like the fix for "the database fell over."
 
+## One building isn't enough — scaling out
+
+Both examples above run as a single process on a single machine, which means they have a single ceiling: however many requests one process can handle at once is the app's entire capacity. Get more customers than that, and the fix usually isn't a bigger building — it's more of them.
+
+Run several copies of the exact same server — same code, same port, different machines — and put one more piece in front of them: a **load balancer**. It's the only address the UI or a DNS name actually points to; every request lands there first, and it hands each one off to whichever backend copy is free, the way a host seats each new table at whichever server has room.
+
+This is invisible from the UI's side on purpose. It still sends one request to one address and gets one reply — it has no idea whether that reply came from building #1 or building #7, and it shouldn't need to. That's the same separation-of-concerns idea running one layer higher: the UI doesn't know how many servers exist any more than it knows how the database stores a row.
+
+It does mean one thing has to change in how you write the server, though: nothing about handling a request should assume "the same building answers next time." If one request saves something in that process's own memory expecting to read it back on the *next* request, and the load balancer happens to route that next request to a different copy, the data simply isn't there. Anything that needs to persist between requests belongs in the database or a shared cache — never in a single server's memory — precisely because you no longer know, or control, which building answers next.
+
 ## Precautions worth taking from the start
 
 A few habits that matter even for a server this small, because beginners consistently skip them until something breaks:
