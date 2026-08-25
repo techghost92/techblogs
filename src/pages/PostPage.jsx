@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { getPostBySlug } from '../lib/posts.js';
+import { SITE_NAME } from '../config/site.js';
 
 function formatDate(dateStr) {
   if (!dateStr) return '';
@@ -14,7 +15,7 @@ export default function PostPage() {
   const post = getPostBySlug(slug);
 
   useEffect(() => {
-    if (post) document.title = `${post.title} — your-domain.com`;
+    if (post) document.title = `${post.title} — ${SITE_NAME}`;
   }, [post]);
 
   if (!post) return <Navigate to="/blog" replace />;
