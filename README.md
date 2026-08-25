@@ -1,4 +1,4 @@
-# Notes from the terminal
+# techblogs
 
 A personal blog about code, built as a React single-page app and published as
 static files to GitHub Pages at

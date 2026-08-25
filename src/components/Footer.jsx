@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-brand">
         <LogoMark size={24} color="#6e6b58" />
-        <span>© {year} techblogs by Onkar</span>
+        <span>© {year} techblogs</span>
       </div>
       <div className="footer-links">
         <a href="https://www.instagram.com/your-domain.com" target="_blank" rel="noopener noreferrer">Instagram</a>

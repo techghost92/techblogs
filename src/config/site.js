@@ -4,6 +4,6 @@
 // domain is set up yet (public/CNAME doesn't exist), so this points at
 // the default GitHub Pages URL — update SITE_URL here if a domain is
 // added later.
-export const SITE_NAME = 'techblogs by Onkar';
+export const SITE_NAME = 'techblogs';
 export const SITE_URL = 'https://onkar3003.github.io/techblogs';
 export const SITE_DESCRIPTION = 'A blog about code, written like one.';
