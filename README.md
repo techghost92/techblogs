@@ -1,7 +1,8 @@
-# your-domain.com
+# Notes from the terminal
 
 A personal blog about code, built as a React single-page app and published as
-static files to GitHub Pages at [your-domain.com](https://your-domain.com).
+static files to GitHub Pages at
+[onkar3003.github.io/techblogs](https://onkar3003.github.io/techblogs).
 
 Posts are plain Markdown files in the repo. Adding one is a commit — there's no
 CMS, no database, and no build step to run by hand.
@@ -27,7 +28,26 @@ npm run dev      # http://localhost:5173
 ```
 
 Other scripts: `npm run build` (outputs to `dist/`) and `npm run preview` to
-serve that build locally.
+serve that build locally. `build` automatically runs two extra steps via npm's
+`pre`/`post` script hooks:
+
+- **prebuild** — [scripts/generate-rss.mjs](scripts/generate-rss.mjs) reads
+  every post's frontmatter and writes `public/rss.xml`, which `vite build`
+  then copies into `dist/` like any other public asset.
+- **postbuild** — [scripts/generate-static-pages.mjs](scripts/generate-static-pages.mjs)
+  takes the just-built `dist/index.html` (which has the real, hashed asset
+  paths) as a template and stamps out `dist/blog/<slug>/index.html` per post,
+  with that post's title, description, and Open Graph/Twitter tags baked in.
+  This site is a client-only SPA with no server, so without this step,
+  crawlers that don't run JS (link unfurlers in Slack/Twitter/etc.) would
+  only ever see the generic homepage tags. Once React mounts, the app behaves
+  exactly as it did before — this only changes what a crawler or a fresh
+  page-load sees before JS runs.
+
+Both scripts, along with `index.html`'s own default meta tags, read site name,
+URL, and description from [src/config/site.js](src/config/site.js) — update
+values there (e.g. when a custom domain is added) rather than in multiple
+places.
 
 ## Publish a post
 
@@ -110,8 +130,11 @@ If posts ever come from an outside source, sanitize before rendering.
 ## Deployment
 
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml) runs on every push
-to `master`: `npm install`, `npm run build`, then upload `dist/` to GitHub
-Pages. The custom domain comes from [public/CNAME](public/CNAME).
+to `master`: `npm install`, `npm run validate:posts`, `npm run build`, then
+upload `dist/` to GitHub Pages. There's no custom domain set up (no
+`public/CNAME` file), so the site is served at its default GitHub Pages URL —
+see [src/config/site.js](src/config/site.js) for the canonical URL used by RSS
+and OG tags.
 
 GitHub Pages serves static files only, so a direct load of `/blog/some-post`
 would 404. [public/404.html](public/404.html) catches the miss, encodes the
@@ -138,5 +161,3 @@ header and dimmed in the footer. Edit that one component and both update.
   [Home.jsx](src/pages/Home.jsx#L64) just calls `preventDefault()` — no emails
   are collected anywhere. Point the form at a provider (Buttondown, ConvertKit,
   Mailchimp) to make it real.
-- No RSS feed, no per-post `<meta>` / Open Graph tags (page titles are set via
-  `document.title` only), no tag filtering or pagination on the archive.
