@@ -2,7 +2,7 @@
 
 A personal blog about code, built as a React single-page app and published as
 static files to GitHub Pages at
-[onkar3003.github.io/techblogs](https://onkar3003.github.io/techblogs).
+[techghost92.github.io/techblogs](https://techghost92.github.io/techblogs).
 
 Posts are plain Markdown files in the repo. Adding one is a commit — there's no
 CMS, no database, and no build step to run by hand.
